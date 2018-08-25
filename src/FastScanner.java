@@ -1,42 +1,48 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.StringTokenizer;
 
+@SuppressWarnings("unused")
 class FastScanner
 {
   private final BufferedReader reader;
   private StringTokenizer tokenizer;
 
-  public FastScanner(InputStream inputStream)
+  FastScanner(InputStream inputStream)
   {
     this.reader = new BufferedReader(new InputStreamReader(inputStream));
   }
 
-  public String nextToken() throws IOException
+  String nextToken() throws IOException
   {
-    while (tokenizer == null || !tokenizer.hasMoreElements())
-      tokenizer = new StringTokenizer(reader.readLine());
+    while (tokenizer == null || !tokenizer.hasMoreTokens())
+    {
+      String line = reader.readLine();
+      if (line == null)
+      {
+        tokenizer = null;
+        return null;
+      }
+      tokenizer = new StringTokenizer(line);
+    }
     return tokenizer.nextToken();
   }
 
-  public int nextInt() throws NumberFormatException, IOException
+  int nextInt() throws NumberFormatException, IOException
   {
     return Integer.parseInt(nextToken());
   }
 
-  public long nextLong() throws NumberFormatException, IOException
+  long nextLong() throws NumberFormatException, IOException
   {
     return Long.parseLong(nextToken());
   }
 
-  public double nextDouble() throws NumberFormatException, IOException
+  double nextDouble() throws NumberFormatException, IOException
   {
     return Double.parseDouble(nextToken());
   }
 
-  public String nextLine() throws IOException
+  String nextLine() throws IOException
   {
     tokenizer = null;
     return reader.readLine();

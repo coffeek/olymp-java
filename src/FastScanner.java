@@ -27,6 +27,16 @@ class FastScanner
     return tokenizer.nextToken();
   }
 
+  int[] readIntArray(int n) throws IOException
+  {
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++)
+    {
+      a[i] = nextInt();
+    }
+    return a;
+  }
+
   int nextInt() throws NumberFormatException, IOException
   {
     return Integer.parseInt(nextToken());

@@ -1,11 +1,7 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
-public final class Solution
+public final class Solution implements Closeable, AutoCloseable
 {
   void Solve() throws NumberFormatException, IOException
   {
@@ -13,18 +9,27 @@ public final class Solution
   }
 
   private final FastScanner input;
-  private final PrintStream output;
+  private final PrintWriter output;
 
   Solution()
   {
     input = new FastScanner(System.in);
-    output = System.out;
+    output = new PrintWriter(System.out);
   }
 
   public static void main(String[] args) throws IOException
   {
-    Solution solution = new Solution();
-    solution.Solve();
+    try (Solution solution = new Solution())
+    {
+      solution.Solve();
+    }
+  }
+
+  @Override
+  public void close()
+  {
+    output.flush();
+    output.close();
   }
 
   @SuppressWarnings("unused")
@@ -41,8 +46,26 @@ public final class Solution
     String nextToken() throws IOException
     {
       while (tokenizer == null || !tokenizer.hasMoreTokens())
-        tokenizer = new StringTokenizer(reader.readLine());
+      {
+        String line = reader.readLine();
+        if (line == null)
+        {
+          tokenizer = null;
+          return null;
+        }
+        tokenizer = new StringTokenizer(line);
+      }
       return tokenizer.nextToken();
+    }
+
+    int[] readIntArray(int n) throws IOException
+    {
+      int[] a = new int[n];
+      for (int i = 0; i < n; i++)
+      {
+        a[i] = nextInt();
+      }
+      return a;
     }
 
     int nextInt() throws NumberFormatException, IOException

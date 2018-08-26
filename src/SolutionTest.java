@@ -9,7 +9,7 @@ class SolutionTest
   @Test
   void case1() throws IOException
   {
-//    assertEquals("qwerty", getResult("qwerty"));
+//    assertEquals("2 2 7 7\n" + "1 1 2 2\n" + "5 5 5 5", getResult("3\n" + "4\n" + "7 2 2 7\n" + "8\n" + "2 8 1 4 8 2 1 5\n" + "5\n" + "5 5 5 5 5"));
   }
 
   private static String trimRight(String s)
@@ -28,8 +28,10 @@ class SolutionTest
     ByteArrayOutputStream output = new ByteArrayOutputStream();
     System.setOut(new PrintStream(output));
 
-    Solution solution = new Solution();
-    solution.Solve();
+    try (Solution solution = new Solution())
+    {
+      solution.Solve();
+    }
 
     return trimRight(output.toString());
   }

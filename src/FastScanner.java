@@ -4,12 +4,13 @@ import java.util.StringTokenizer;
 @SuppressWarnings("unused")
 class FastScanner
 {
+  private static final int bufferSize = 64 * 1024;
   private final BufferedReader reader;
   private StringTokenizer tokenizer;
 
   FastScanner(InputStream inputStream)
   {
-    this.reader = new BufferedReader(new InputStreamReader(inputStream));
+    this.reader = new BufferedReader(new InputStreamReader(inputStream), bufferSize);
   }
 
   String nextToken() throws IOException

@@ -38,6 +38,16 @@ class FastScanner
     return a;
   }
 
+  long[] readLongArray(int n) throws IOException
+  {
+    long[] a = new long[n];
+    for (int i = 0; i < n; i++)
+    {
+      a[i] = nextLong();
+    }
+    return a;
+  }
+
   int nextInt() throws NumberFormatException, IOException
   {
     return Integer.parseInt(nextToken());

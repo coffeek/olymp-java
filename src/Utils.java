@@ -47,4 +47,21 @@ class Utils
     }
     return (int) result;
   }
+
+  static int lowerBound(int[] a, int l, int r, int k)
+  {
+    while (l < r)
+    {
+      int m = l + (r - l) / 2;
+      if (k <= a[m])
+      {
+        r = m;
+      }
+      else
+      {
+        l = m + 1;
+      }
+    }
+    return l;
+  }
 }
